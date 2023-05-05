@@ -21,4 +21,5 @@ class Channel:
         channel = youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
         return channel
 
-
+vdud = Channel('UCMCgOm8GZkHp8zJ6l7_hIuA')
+print(vdud.print_info())
