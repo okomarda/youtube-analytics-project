@@ -4,7 +4,7 @@ import os
 from googleapiclient.discovery import build
 
 # YT_API_KEY скопирован из гугла и вставлен в переменные окружения
-api_key: str = os.getenv('YT_API_KEY')
+api_key: str = os.getenv('API_KEY_2')
 
 # создать специальный объект для работы с API
 youtube = build('youtube', 'v3', developerKey=api_key)
@@ -21,6 +21,4 @@ class Channel:
         channel = youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
         return channel
 
-vdud = Channel("UCMCgOm8GZkHp8zJ6l7_hIuA")
 
-print(vdud.print_info())
