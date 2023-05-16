@@ -1,10 +1,13 @@
 import json
 import os
 
+
 from googleapiclient.discovery import build
 
 # YT_API_KEY скопирован из гугла и вставлен в переменные окружения
 api_key: str = os.getenv('API_KEY_2')
+
+
 
 class Channel:
     """"Класс для ютуб-канала"""
@@ -13,12 +16,12 @@ class Channel:
     def __init__(self, channel_id='UCMCgOm8GZkHp8zJ6l7_hIuA'):
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
         self.__channel_id = channel_id
-        self.title = self.print_info()['items'][0]['snippet']['title']
-        self.description = self.print_info()['items'][0]['snippet']['description']
-        self.url = self.print_info()['items'][0]['snippet']['thumbnails']['default']['url']
-        self.subscriber = self.print_info()['items'][0]['statistics']['subscriberCount']
-        self.video_count = self.print_info()['items'][0]['statistics']['videoCount']
-        self.view_count = self.print_info()['items'][0]['statistics']['viewCount']
+        self.title = self.load_file("../homework-2/channel.json")['items'][0]['snippet']['title']
+        self.description = self.load_file("../homework-2/channel.json")['items'][0]['snippet']['description']
+        self.url = self.load_file("../homework-2/channel.json")['items'][0]['snippet']['thumbnails']['default']['url']
+        self.subscriber = self.load_file("../homework-2/channel.json")['items'][0]['statistics']['subscriberCount']
+        self.video_count = self.load_file("../homework-2/channel.json")['items'][0]['statistics']['videoCount']
+        self.view_count = self.load_file("../homework-2/channel.json")['items'][0]['statistics']['viewCount']
 
     @property
     def channel_id(self):
@@ -36,13 +39,21 @@ class Channel:
         youtube = build('youtube', 'v3', developerKey=api_key)
         return youtube
 
-    def print_info(self):
-        """Выводит в консоль информацию о канале."""
+    def channel_to_json(self, channel_file):
+        """Добавляет в список данные канала"""
         channel = self.get_service().channels().list(id=self.__channel_id, part='snippet,statistics').execute()
-        return channel
+        channel_file = '../homework-2/channel.json'
+        with open (channel_file, 'w') as f:
+            json.dump(channel, f)
+
+    def load_file(self, channel_file):
+        with open (channel_file, 'r') as f:
+            data = json.load(f)
+        return data
+
 
     def to_json(self, youtube_file):
-        youtube_file = 'vdud.json'
+        youtube_file = '../homework-2/vdud.json'
         json_data = {"title": self.title, "description": self.description, "url": self.url, "subscriber": self.subscriber, "video_count": self.video_count, "video_view": self.view_count}
         with open(youtube_file, 'w') as f:
             json.dump(json_data, f)
@@ -87,7 +98,9 @@ class Channel:
 
 #vdud = Channel('UCMCgOm8GZkHp8zJ6l7_hIuA')
 #redactsiya = Channel('UC1eFXmJNkjITxPFWTy6RsWg')
-#print(redactsiya.print_info())
+#print(list_data)
+#vdud.channel_to_json("channel_file")
+#print(vdud.load_file("channel.json"))
 #print(vdud.title)
 #print(vdud.description)
 #print(vdud.url)
@@ -108,6 +121,7 @@ class Channel:
 #print(vdud >= redactsiya)
 #print(vdud < redactsiya)
 #print(vdud <= redactsiya)
+
 
 
 
