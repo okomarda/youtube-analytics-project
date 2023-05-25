@@ -96,7 +96,7 @@ class Channel:
         subs = self.__compare_subs (other)
         return int (self.subscriber) <= int (subs)
 
-#vdud = Channel('UCMCgOm8GZkHp8zJ6l7_hIuA')
+vdud = Channel('UCMCgOm8GZkHp8zJ6l7_hIuA')
 #redactsiya = Channel('UC1eFXmJNkjITxPFWTy6RsWg')
 #print(list_data)
 #vdud.channel_to_json("channel_file")
@@ -111,7 +111,7 @@ class Channel:
 #print(vdud.channel_id)
 #print(vdud.channel_id)
 #vdud.channel_id = "sss"
-#vdud.to_json('vdud.json')
+vdud.to_json('vdud.json')
 #print(redactsiya.subscriber)
 #print(vdud + redactsiya)
 #print(vdud - redactsiya)
@@ -121,6 +121,7 @@ class Channel:
 #print(vdud >= redactsiya)
 #print(vdud < redactsiya)
 #print(vdud <= redactsiya)
+print(vdud.load_file('../homework-2/channel.json'))
 
 
 
