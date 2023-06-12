@@ -11,11 +11,18 @@ class Video():
     api_key: str = os.getenv('API_KEY_2')
 
     def __init__(self, video_id):
-        self.video_id = video_id
-        self.title = self.video_to_print()['items'][0]['snippet']['title']
-        self.video_url = self.video_to_print()['items'][0]['snippet']['thumbnails']['default']['url']
-        self.view_count = self.video_to_print()['items'][0]['statistics']['viewCount']
-        self.like_count = self.video_to_print()['items'][0]['statistics']['likeCount']
+        try:
+            self.video_id = video_id
+            self.title = self.video_to_print()['items'][0]['snippet']['title']
+            self.video_url = self.video_to_print()['items'][0]['snippet']['thumbnails']['default']['url']
+            self.view_count = self.video_to_print()['items'][0]['statistics']['viewCount']
+            self.like_count = self.video_to_print()['items'][0]['statistics']['likeCount']
+        except:
+            self.video_id = video_id
+            self.title = None
+            self.video_url = None
+            self.view_count = None
+            self.like_count = None
 
     @classmethod
     def get_service(cls):
@@ -27,6 +34,8 @@ class Video():
         """Добавляет в список данные канала"""
         video_list = self.get_service().videos().list(part='snippet,statistics,contentDetails,topicDetails', id=self.video_id).execute()
         return video_list
+
+
     #     video_file = 'video.json'
     #     with open (video_file, 'w') as f:
     #         json.dump(video_list, f)
@@ -64,13 +73,15 @@ class PLvideo(Video):
 #             data = json.load (f)
 #         return data
 
-video1 = Video('9lO06Zxhu88')
+video1 = Video('9lO06Zxhu88qq')
 video2 = PLvideo('BBotskuyw_M', 'PL7Ntiz7eTKwrqmApjln9u4ItzhDLRtPuD')
 
-print(video1)
-print(video2)
+print(video1.video_id)
+print(video1.title)
+print(video1.like_count)
+#print(video2)
 #print(video2.video_id)
-#print(video1.video_to_json())
+#print(video1.video_to_print())
 #print(video2.play_to_json())
 #video1.loa
 # d_file('video.json')

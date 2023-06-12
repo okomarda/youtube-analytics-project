@@ -111,7 +111,7 @@ vdud = Channel('UCMCgOm8GZkHp8zJ6l7_hIuA')
 #print(vdud.channel_id)
 #print(vdud.channel_id)
 #vdud.channel_id = "sss"
-vdud.to_json('vdud.json')
+#vdud.to_json('vdud.json')
 #print(redactsiya.subscriber)
 #print(vdud + redactsiya)
 #print(vdud - redactsiya)
@@ -121,7 +121,7 @@ vdud.to_json('vdud.json')
 #print(vdud >= redactsiya)
 #print(vdud < redactsiya)
 #print(vdud <= redactsiya)
-print(vdud.load_file('../homework-2/channel.json'))
+#print(vdud.load_file('../homework-2/channel.json'))
 
 
 
