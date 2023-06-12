@@ -11,7 +11,7 @@ from googleapiclient.discovery import build
 api_key: str = os.getenv('API_KEY_2')
 counter = 0
 
-class PlayList(Channel):
+class PlayList():
     api_key: str = os.getenv('API_KEY_2')
 
     def __init__(self, playlist_id):
